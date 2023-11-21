@@ -58,3 +58,14 @@ alt="maine-coon-cat" />
 
 elementList.innerHTML = kittenOne + kittenTwo + kittenThree;
 
+const form = document.querySelector('.js_form');
+form.classList.add('collapsed');
+const addKitten = document.querySelector('.js_plus');
+addKitten.addEventListener('click', (event) => {
+form.classList.remove('collapsed');
+});
+
+const cancel = document.querySelector('.js_cancel');
+cancel.addEventListener('click', (event) => {
+  form.classList.add('collapsed');
+  });
