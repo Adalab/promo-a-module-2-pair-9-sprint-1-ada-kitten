@@ -1,6 +1,9 @@
 'use strict';
 
 const elementList = document.querySelector('.js_list');
+const kittenDesc1 = `Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos
+hace 500 años, donde tuvo su origen muy posiblemente.`
+
 
 
 /* Agregar el código del li desde HTMl 
@@ -14,10 +17,7 @@ const kittenOne = `<li class="card">
   />
   <h3 class="card_title">Anastacio</h3>
   <h4 class="card_race">Siamés</h4>
-  <p class="card_description">
-            Porte elegante, su patrón de color tan característico y sus ojos
-            de un azul intenso, pero su historia se remonta a Asía al menos
-            hace 500 años, donde tuvo su origen muy posiblemente.
+  <p class="card_description">${kittenDesc1}
    </p>
 </article>
 </li>`;
@@ -108,3 +108,12 @@ addElement.addEventListener('click', (event) => {
   form.reset();
 });
 
+const input_Search_desc=document.querySelector('.js_in_search_desc');
+const button_search=document.querySelector('.js_btn_search');
+
+button_search.addEventListener('click', (event) => {
+  const descrSearchText=input_Search_desc.value;
+
+
+console.log(descrSearchText);
+});
