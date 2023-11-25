@@ -62,10 +62,49 @@ const form = document.querySelector('.js_form');
 form.classList.add('collapsed');
 const addKitten = document.querySelector('.js_plus');
 addKitten.addEventListener('click', (event) => {
-form.classList.remove('collapsed');
+  form.classList.remove('collapsed');
 });
 
 const cancel = document.querySelector('.js_cancel');
 cancel.addEventListener('click', (event) => {
   form.classList.add('collapsed');
-  });
+});
+
+const addElement = document.querySelector('.js-btn-add');
+
+addElement.addEventListener('click', (event) => {
+  event.preventDefault();
+  const inputDesc = document.querySelector('.js-input-desc');
+  const inputPhoto = document.querySelector('.js-input-photo');
+  const inputName = document.querySelector('.js-input-name');
+  const inputBreed = document.querySelector('.js-input-breed');
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+  const valueBreed = inputBreed.value;
+  console.log('Input Desc:', inputDesc.value);
+  console.log('Input Photo:', inputPhoto.value);
+  console.log('Input Name:', inputName.value);
+  console.log('Input Breed:', inputBreed.value);
+
+  /* Código HTML de un gatito */
+  const newKittenHTML = `<li class="card">
+<article>
+  <img
+    class="card_img"
+    src="` + valuePhoto + `"
+    alt="gatito"
+  />
+  <h3 class="card_title">` + valueName + `</h3>
+  <h4 class="card_race">` + valueBreed + `</h4>
+  <p class="card_description">
+      ` + valueDesc + `
+   </p>
+</article>
+</li>`;
+
+  elementList.innerHTML += newKittenHTML;
+  form.classList.add('collapsed');
+  form.reset();
+});
+
