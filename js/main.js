@@ -1,9 +1,23 @@
 'use strict';
 
 const elementList = document.querySelector('.js_list');
-const kittenDesc1 = `Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos
-hace 500 años, donde tuvo su origen muy posiblemente.`
+const labelMessageError = document.querySelector('.js-label-error');
+const form = document.querySelector('.js_form');
+const addKitten = document.querySelector('.js_plus');
+const cancel = document.querySelector('.js_cancel');
+const addElement = document.querySelector('.js-btn-add');
+const input_Search_desc = document.querySelector('.js_in_search_desc');
+const button_search = document.querySelector('.js_btn_search');
 
+
+const kittenDesc1 = `Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos
+hace 500 años, donde tuvo su origen muy posiblemente.`;
+const kittenDesc2 = `Produce fascinación y curiosidad. Exótico, raro, bello, extraño…
+hasta con pinta de alienígena han llegado a definir a esta raza
+gatuna que se caracteriza por la «ausencia» de pelo.`;
+const kittenDesc3 = `  Tienen la cabeza cuadrada y los ojos simétricos, por lo que su
+bella mirada se ha convertido en una de sus señas de identidad.
+Sus ojos son grandes y las orejas resultan largas y en punta.`;
 
 
 /* Agregar el código del li desde HTMl 
@@ -33,10 +47,7 @@ src="https://dev.adalab.es/sphynx-gato.webp"
 alt="sphynx-cat" />
 <h3 class="card_title">Fiona</h3>
 <h4 class="card_race">Sphynx</h4>
-<p class="card_description">
-  Produce fascinación y curiosidad. Exótico, raro, bello, extraño…
-  hasta con pinta de alienígena han llegado a definir a esta raza
-  gatuna que se caracteriza por la «ausencia» de pelo.
+<p class="card_description">${kittenDesc2} 
 </p>
 </article>
 </li>`;
@@ -48,29 +59,22 @@ src="https://dev.adalab.es/maine-coon-cat.webp"
 alt="maine-coon-cat" />
 <h3 class="card_title">Cielo</h3>
 <h4 class="card_race">Maine Coon</h4>
-<p class="card_description">
-  Tienen la cabeza cuadrada y los ojos simétricos, por lo que su
-  bella mirada se ha convertido en una de sus señas de identidad.
-  Sus ojos son grandes y las orejas resultan largas y en punta.
+<p class="card_description">${kittenDesc3}
 </p>
 </article>
 </li>`;
 
 elementList.innerHTML = kittenOne + kittenTwo + kittenThree;
 
-const form = document.querySelector('.js_form');
 form.classList.add('collapsed');
-const addKitten = document.querySelector('.js_plus');
+
 addKitten.addEventListener('click', (event) => {
   form.classList.remove('collapsed');
 });
 
-const cancel = document.querySelector('.js_cancel');
 cancel.addEventListener('click', (event) => {
   form.classList.add('collapsed');
 });
-
-const addElement = document.querySelector('.js-btn-add');
 
 addElement.addEventListener('click', (event) => {
   event.preventDefault();
@@ -87,8 +91,11 @@ addElement.addEventListener('click', (event) => {
   console.log('Input Name:', inputName.value);
   console.log('Input Breed:', inputBreed.value);
 
-  /* Código HTML de un gatito */
-  const newKittenHTML = `<li class="card">
+  if (!valueDesc || !valuePhoto || !valueName || !valueBreed) {
+    labelMessageError.innerHTML = "Campo requerido";
+  } else {
+    /* Código HTML de un gatito */
+    const newKittenHTML = `<li class="card">
 <article>
   <img
     class="card_img"
@@ -103,17 +110,25 @@ addElement.addEventListener('click', (event) => {
 </article>
 </li>`;
 
-  elementList.innerHTML += newKittenHTML;
-  form.classList.add('collapsed');
-  form.reset();
+    elementList.innerHTML += newKittenHTML;
+    form.classList.add('collapsed');
+    form.reset();
+  }
 });
-
-const input_Search_desc=document.querySelector('.js_in_search_desc');
-const button_search=document.querySelector('.js_btn_search');
 
 button_search.addEventListener('click', (event) => {
-  const descrSearchText=input_Search_desc.value;
+  event.preventDefault();
+  const descrSearchText = input_Search_desc.value;
+  if (kittenDesc1.includes(descrSearchText)) {
+    elementList.innerHTML = kittenOne;
+  }
+  if (kittenDesc2.includes(descrSearchText)) {
+    elementList.innerHTML += kittenTwo;
+  }
+  if (kittenDesc3.includes(descrSearchText)) {
+    elementList.innerHTML += kittenThree;
+  }
 
-
-console.log(descrSearchText);
+  console.log(descrSearchText);
 });
+
