@@ -8,6 +8,7 @@ const cancel = document.querySelector('.js_cancel');
 const addElement = document.querySelector('.js-btn-add');
 const input_Search_desc = document.querySelector('.js_in_search_desc');
 const button_search = document.querySelector('.js_btn_search');
+//const addForm = document.querySelector('.js_add_form');
 
 const kittenImage1 = 'https://dev.adalab.es/gato-siames.webp';
 const kittenName1 = 'Anastacio';
@@ -78,7 +79,39 @@ addKitten.addEventListener('click', handleClickNewCatForm);
 
 cancel.addEventListener('click', hideNewCatForm);
 
-addElement.addEventListener('click', (event) => {
+addElement.addEventListener('click', addNewKitten);
+
+button_search.addEventListener('click', (event) => {
+  event.preventDefault();
+  const descrSearchText = input_Search_desc.value;
+  if (kittenDesc1.includes(descrSearchText)) {
+    elementList.innerHTML = kittenOne;
+  }
+  if (kittenDesc2.includes(descrSearchText)) {
+    elementList.innerHTML += kittenTwo;
+  }
+  if (kittenDesc3.includes(descrSearchText)) {
+    elementList.innerHTML += kittenThree;
+  }
+
+  console.log(descrSearchText);
+});
+
+
+function hideNewCatForm() {
+  form.classList.add('collapsed');
+}
+
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (form.classList.contains('collapsed')) {
+    form.classList.remove('collapsed');
+  } else {
+    form.classList.add('collapsed');
+  }
+}
+
+function addNewKitten(event) {
   event.preventDefault();
   const inputDesc = document.querySelector('.js-input-desc');
   const inputPhoto = document.querySelector('.js-input-photo');
@@ -114,36 +147,6 @@ addElement.addEventListener('click', (event) => {
 
     elementList.innerHTML += newKittenHTML;
     form.classList.add('collapsed');
-    form.reset();
-  }
-});
-
-button_search.addEventListener('click', (event) => {
-  event.preventDefault();
-  const descrSearchText = input_Search_desc.value;
-  if (kittenDesc1.includes(descrSearchText)) {
-    elementList.innerHTML = kittenOne;
-  }
-  if (kittenDesc2.includes(descrSearchText)) {
-    elementList.innerHTML += kittenTwo;
-  }
-  if (kittenDesc3.includes(descrSearchText)) {
-    elementList.innerHTML += kittenThree;
-  }
-
-  console.log(descrSearchText);
-});
-
-
-function hideNewCatForm  () {
-  form.classList.add('collapsed');
-}
-
-function handleClickNewCatForm(event) {
-  event.preventDefault();
-  if (form.classList.contains('collapsed')) {
-    form.classList.remove('collapsed');
-  } else {
-    form.classList.add('collapsed');
+    //addForm.reset();
   }
 }
